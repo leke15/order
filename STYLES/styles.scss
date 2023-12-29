@@ -1,6 +1,43 @@
-$backgroundColor : #ffa742;
-$text : #e7531900;
+$text : #ffa742;
+$backgroundColor : #08183bfb;
 
 body{
     background-color: $backgroundColor;
+    color: $text;
+    font-family: 'Noto Sans', sans-serif
+}
+
+#search_field{
+    border-radius: 10px;
+    width: 660px;
+    height: 40px;
+    text-align: center;
+    margin-left: 450px;
+    font-family: 'Noto Sans', sans-serif;
+    background: $text;
+    color: white;
+}
+
+#add{
+    margin-top: 50px;
+    margin-left: 20px;
+    height: 40px;
+    width: 140px;
+    text-align: center;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: $text;
+    #plus_sign{
+        margin-right: 14px;
+    }
+}
+
+#empty_notes{
+    display: block;
+    margin-top: 100px;
+    margin-left: 600px;
+    #lightbulb{
+        margin-left: 140px;
+    }
 }
