@@ -9,7 +9,7 @@ $(document).ready(function(){
     });
 
     document.getElementById("add").addEventListener('click', function(){
-        window.location.href = "../WEBSITES/addnote.html"
+        window.location.href = "../WEBSITES/addnote.php"
     });
 
  // the function responsible for the add button animation   
