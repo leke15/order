@@ -8,6 +8,9 @@ $(document).ready(function(){
     });
     });
 
+    document.getElementById("add").addEventListener('click', function(){
+        window.location.href = "../WEBSITES/addnote.html"
+    });
 
  // the function responsible for the add button animation   
     function hoverbtn (){
@@ -17,5 +20,4 @@ $(document).ready(function(){
         "transition":"all 0.2s ease-in-out"
     });
     }
-
 });
