@@ -25,7 +25,36 @@
         <button id="savebtn"><i class="fa-regular fa-bookmark"></i> Save</button>
             </div>  
 </div>
-
     </section>
-</body>
+        <?php
+        $dsn = "mysql:host=localhost;dbname=phplearning";
+        $dbusername = "otheruser";
+        $dbpassword = "swordfish";
+        if (isset($_GET["value"], $_GET["topic"], $_GET["type"])) {
+            $dbnote = htmlspecialchars($_GET["value"]);
+            $dbtopic = htmlspecialchars($_GET["topic"]);
+            $dbtype = htmlspecialchars($_GET["type"]);
+        
+            $sql = "INSERT INTO notes (note, type, topic) VALUES (?,?,?);";
+        
+            try {
+                $pdo = new PDO($dsn, $dbusername, $dbpassword);
+                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute([$dbnote,$dbtype,$dbtopic]);
+        
+                if($stmt->rowCount() > 0) {
+                    echo "Note successfully created and added to the database.";
+                } else {
+                    echo "Failed to create note.";
+                }
+        
+            } catch (PDOException $e) {
+                echo "Connection failed: " . $e->getMessage();
+            }
+        }
+ 
+        ?>
+    </body>
 </html>

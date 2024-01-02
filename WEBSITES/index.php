@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>Notes in Order</h1>
-<!-- Searh bar for the notes-->
+<!-- Search bar for the notes-->
 
     <div id="search_bar">
         <input type="search" name="search" id="search_field" placeholder="What you looking for?...">
@@ -29,5 +29,28 @@
         <i class="fa-regular fa-lightbulb" id="lightbulb"></i>
         <p>Let's get some notes in here shall we?...</p>
     </section>
+
+    <?php
+       $dsn = "mysql:host=localhost;dbname=phplearning";
+       $dbusername = "otheruser";
+       $dbpassword = "swordfish";
+       
+       try {
+           $pdo = new PDO($dsn, $dbusername, $dbpassword);
+           $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+           $check = $pdo->query("SELECT COUNT(*) FROM notes");
+           $result = $check->fetchColumn();
+       
+           if ($result > 0) {
+               echo "<style>#empty_notes{display:none;}</style>";
+           } else {
+               echo "<style>#empty_notes{display:block;}</style>";
+           }
+       
+       } catch (PDOException $e) {
+           echo "Connection failed: " . $e->getMessage();
+       }
+
+        ?>
 </body>
 </html>
