@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../STYLES/styles.css" type="text/css">
+    <link rel="stylesheet" href="../STYLES/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
@@ -23,13 +23,26 @@
 <!--Add notes button -->
 
     <button id="add"><i class="fa-solid fa-plus" id="plus_sign"></i>New Note</button>
- 
+   
+    <section id="populated-notes">
+       <div class="container">
+         <div class="content-section">
+            <div class="card">
+                <h4><b>Title</b></h4>
+                <p>Note</p>
+                <button id = "editbtn"><i class="fa-regular fa-pen-to-square"></i>Edit</button>
+            </div>
+        </div>
+    </div>
+    </section>
+
 <!--The actual notes derived from the database-->   
     <section id="empty_notes">
         <i class="fa-regular fa-lightbulb" id="lightbulb"></i>
         <p>Let's get some notes in here shall we?...</p>
     </section>
 
+  
     <?php
        $dsn = "mysql:host=localhost;dbname=phplearning";
        $dbusername = "otheruser";
@@ -42,7 +55,7 @@
            $result = $check->fetchColumn();
        
            if ($result > 0) {
-               echo "<style>#empty_notes{display:none;}</style>";
+               echo "<style>#populated-notes{display:block;}</style>";
            } else {
                echo "<style>#empty_notes{display:block;}</style>";
            }
