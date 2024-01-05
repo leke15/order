@@ -13,8 +13,11 @@
 </head>
 <body>
     <section id="newnote">
+    <form id="note-form" method="POST">
         <h1 id="topic" contenteditable="true">Title...</h1>
         <p id="note" contenteditable="true">Add note here...</p>
+        <button type="submit" id="savebtn"><i class="fa-regular fa-bookmark"></i> Save</button>
+        </form>
 
         <div id="container">  
         <div id="note_type">
@@ -30,10 +33,10 @@
         $dsn = "mysql:host=localhost;dbname=phplearning";
         $dbusername = "otheruser";
         $dbpassword = "swordfish";
-        if (isset($_GET["value"], $_GET["topic"], $_GET["type"])) {
-            $dbnote = htmlspecialchars($_GET["value"]);
-            $dbtopic = htmlspecialchars($_GET["topic"]);
-            $dbtype = htmlspecialchars($_GET["type"]);
+        if (isset($_POST["value"], $_POST["topic"], $_POST["type"])) {
+            $dbnote = htmlspecialchars($_POST["value"]);
+            $dbtopic = htmlspecialchars($_POST["topic"]);
+            $dbtype = htmlspecialchars($_POST["type"]);
         
             $sql = "INSERT INTO notes (note, type, topic) VALUES (?,?,?);";
         

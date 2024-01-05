@@ -1,4 +1,3 @@
-const { event } = require("jquery");
 
 $(document).ready(function () {
     $("#savebtn").hover(hoverbtn,function(event){
@@ -10,24 +9,26 @@ $(document).ready(function () {
     });
     });
 
-    document.getElementById("savebtn").addEventListener('click',function(){
-    let note = document.getElementById("note").innerText;
-    let topic = document.getElementById("topic").innerText;
-    let type = "";
-    if ($('input[name="bullets"]:checked').length > 0) {
-        type = "bullets";
-    }else if ($('input[name="lists"]:checked').length > 0) {
-        type = "lists"
-    } 
-    $.ajax({
-        url: 'addnote.php',
-        type: 'get',
-        data: {value: note, topic: topic, type: type},
-        success: function(response) {
-            alert(response);
-        }
+    $("#savebtn").click(function() {
+        var topic = $("#topic").text();
+        var note = $("#note").text();
+        var type = getSelectedType(); // Function to determine selected type (list or bullets)
+    
+        const formData = new FormData();
+        formData.append("topic", topic);
+        formData.append("note", note);
+        formData.append("type", type);
+    
+        fetch("newnote.php", {
+            method: "POST",
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            // Handle server response (e.g., display success/failure message)
+        })
+        .catch(error => console.error(error));
     });
-    })
     
     function hoverbtn (){
         $(this).css({
@@ -35,5 +36,15 @@ $(document).ready(function () {
         "transform":"scale(1.1)",
         "transition":"all 0.2s ease-in-out"
     });
+    }
+
+    function getSelectedType() {
+        if ($("#list").is(":checked")) {
+            return "list";
+        } else if ($("input[name='bullets']:checked").length > 0) {
+            return "bullets";
+        } else {
+            return ""; // Handle cases where no type is selected
+        }
     }
 });
